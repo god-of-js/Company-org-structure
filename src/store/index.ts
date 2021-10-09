@@ -5,7 +5,7 @@ import {
   IS_AUTHENTICATED_GETTER,
   SET_USER_DETAILS_MUTATION,
 } from "./storeVariables.types";
-import { apolloProvider } from "@/apollo";
+import { apolloProvider } from "@/api/apollo.instance";
 import { USER_LOGIN_MUTATION } from "@/graphql/mutations";
 Vue.use(Vuex);
 const { defaultClient } = apolloProvider;
