@@ -12,12 +12,9 @@ fontAwesomeIconLibrary.add(faUser, faLock);
 })
 export default class BaseIcon extends Vue {
   @Prop({ required: true }) iconName!: string;
-  @Prop({ default: "font-awesome" }) iconSource!: string;
 }
 </script>
 
 <template>
-  <FontAwesomeIcon v-if="iconSource === 'font-awesome'" :icon="iconName" />
+  <FontAwesomeIcon :icon="iconName" />
 </template>
-
-<style module></style>

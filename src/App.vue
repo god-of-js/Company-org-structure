@@ -1,27 +1,18 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { mapGetters } from "vuex";
-import { IS_AUTHENTICATED_GETTER } from "@/store/storeVariables.types";
-const TheTopNavigation = () => import("./components/TheTopNavigation.vue");
+
 @Component({
-  components: {
-    TheTopNavigation,
-  },
-  computed: {
-    ...mapGetters({
-      isAuthenticated: IS_AUTHENTICATED_GETTER,
-    }),
-  },
+  name: "App",
 })
 export default class App extends Vue {}
 </script>
 
 <template>
   <div id="app">
-    <the-top-navigation v-if="isAuthenticated" />
-    <!-- Adding a key to all routes it best practice. it also helps incase there is a route 
-    with dynamic parameters, it helps the route re-render when the fullPath changes.-->
-    <router-view :key="$route.fullPath" />
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non hic earum
+    accusamus ea pariatur, culpa reiciendis totam sit eos voluptate itaque? Nemo
+    pariatur odit dolore ea reprehenderit, voluptate fugit architecto!
+    <router-view />
   </div>
 </template>
 

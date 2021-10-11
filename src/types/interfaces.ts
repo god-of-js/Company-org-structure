@@ -1,18 +1,14 @@
-interface User {
-  emailAddress: string;
-  password: string;
+export interface Transaction {
+  id: number;
+  uid: string;
+  account: string;
+  description: string;
+  category: string;
+  reference: string;
+  currency: string;
+  amount: string;
+  status: string;
+  transactionDate: string;
+  createdAt: string;
+  updatedAt: string;
 }
-interface Headers {
-  authorization?: string;
-  "x-hasura-admin-secret": string;
-}
-interface CurrentUserInterface {
-  access_token: {
-    token: string;
-    tokenType: string;
-  };
-  emailAddress: string;
-  id: string;
-  password: string;
-}
-export { User, Headers, CurrentUserInterface };
