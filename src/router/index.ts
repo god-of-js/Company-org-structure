@@ -1,12 +1,18 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import TransactionList from "@/views/TransactionList.vue";
+import Transactions from "@/views/Transactions.vue";
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    component: TransactionList,
+    name: "Transactions",
+    component: Transactions,
+  },
+  {
+    path: "/transactions/:id",
+    name: "Transaction",
+    component: () => import("@/views/Transaction.vue"),
   },
   {
     path: "*",

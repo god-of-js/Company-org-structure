@@ -5,14 +5,13 @@ import { Component, Vue, Prop } from "vue-property-decorator";
   name: "BaseLink",
 })
 export default class BaseLink extends Vue {
-  @Prop({ required: true, default: "/" }) routeName!: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Prop({ required: true }) to!: { name: string; params: any };
 }
 </script>
 
 <template>
-  <router-link :to="{ name: routeName }" :class="$style['c-base-link']"
-    ><slot
-  /></router-link>
+  <router-link :to="to" :class="$style['c-base-link']"><slot /></router-link>
 </template>
 
 <style module lang="scss">

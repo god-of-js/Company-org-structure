@@ -1,6 +1,5 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-
 @Component({
   name: "App",
 })
@@ -9,9 +8,6 @@ export default class App extends Vue {}
 
 <template>
   <div id="app">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non hic earum
-    accusamus ea pariatur, culpa reiciendis totam sit eos voluptate itaque? Nemo
-    pariatur odit dolore ea reprehenderit, voluptate fugit architecto!
     <router-view />
   </div>
 </template>
@@ -23,9 +19,9 @@ export default class App extends Vue {}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #ffffff;
   background: $base-color;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
 #nav {
