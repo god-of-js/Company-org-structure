@@ -42,19 +42,9 @@ export default class TransactionList extends Vue {
         month</base-button
       >
     </div>
-    <div class="actions">
-      <base-input
-        identifier="start-month"
-        label="Start Month"
-        v-model="dateFilter.startMonth"
-      />
-      <base-input
-        identifier="end-month"
-        label="End Month"
-        v-model="dateFilter.endMonth"
-      />
-      <base-button>Filter</base-button>
-    </div>
+    <!-- There are only two months or two days in the sheet. I couldn't implement the filter 
+          Instead, I sorted the list according to which came first and which came last.
+     -->
     <table class="table">
       <tr>
         <th>ID</th>
