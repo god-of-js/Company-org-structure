@@ -25,21 +25,19 @@ class TransactionsModule extends VuexModule {
 
   get transactionList(): ITransaction[] {
     if (this.sortValue === "start") {
-      const transactions = this.transactions?.slice().sort((first, second) => {
-        const a = new Date(first.createdAt);
-        const b = new Date(second.createdAt);
-
-        return a.getTime() - b.getTime();
+      return this.transactions?.slice().sort((first, second) => {
+        return (
+          new Date(first.createdAt).getTime() -
+          new Date(second.createdAt).getTime()
+        );
       });
-      return transactions;
     } else if (this.sortValue === "end") {
-      const transactions = this.transactions?.slice().sort((first, second) => {
-        const a = new Date(first.createdAt);
-        const b = new Date(second.createdAt);
-
-        return b.getTime() - a.getTime();
+      return this.transactions?.slice().sort((first, second) => {
+        return (
+          new Date(second.createdAt).getTime() -
+          new Date(first.createdAt).getTime()
+        );
       });
-      return transactions;
     }
     return this.transactions;
   }
