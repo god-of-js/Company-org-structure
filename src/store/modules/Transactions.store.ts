@@ -1,12 +1,12 @@
 import { VuexModule, Module, Mutation, Action } from "vuex-class-modules";
 import API from "@/api";
-import { IFilter, ITransaction } from "@/types/interfaces";
+import { ISorter, ITransaction } from "@/types/interfaces";
 
 @Module
 class TransactionsModule extends VuexModule {
   transactions: ITransaction[] = [];
   transaction: ITransaction | null = null;
-  sortValue: IFilter = null;
+  sortValue: ISorter = null;
 
   @Mutation
   setTransactions(param: ITransaction[]) {
@@ -19,7 +19,7 @@ class TransactionsModule extends VuexModule {
   }
 
   @Mutation
-  setFilter(value: IFilter) {
+  setFilter(value: ISorter) {
     this.sortValue = value;
   }
 

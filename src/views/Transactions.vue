@@ -1,22 +1,26 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { transactionModule } from "@/store/modules/Transactions.store";
-import { IFilter, ITransaction } from "@/types/interfaces";
-
+import { ISorter, ITransaction, IDateFilter } from "@/types/interfaces";
+import months from "@/helpers/months";
 @Component({
   name: "Transactions",
 })
 export default class TransactionList extends Vue {
+  private dateFilter: IDateFilter = {
+    startMonth: "",
+    endMonth: "",
+  };
   get transactions(): ITransaction[] {
     return transactionModule.transactionList;
   }
   getDate(date: string): string {
-    return ` ${new Date(date).getDate()} - ${new Date(
-      date
-    ).getMonth()} - ${new Date(date).getFullYear()}`;
+    return ` ${new Date(date).getDate()} - ${
+      months[new Date(date).getMonth() - 1]
+    } - ${new Date(date).getFullYear()}`;
   }
 
-  private setFilter(value: IFilter) {
+  private setFilter(value: ISorter) {
     transactionModule.setFilter(value);
   }
 
@@ -30,13 +34,26 @@ export default class TransactionList extends Vue {
   <div>
     <div class="actions">
       <base-button @click="setFilter('start')"
-        ><base-icon icon="filter" class="icon-margin" /> Filter by start
+        ><base-icon icon="filter" class="icon-margin" /> Get list from start
         month</base-button
       >
       <base-button @click="setFilter('end')"
-        ><base-icon icon="filter" class="icon-margin" /> Filter by end
+        ><base-icon icon="filter" class="icon-margin" /> Get list from end
         month</base-button
       >
+    </div>
+    <div class="actions">
+      <base-input
+        identifier="start-month"
+        label="Start Month"
+        v-model="dateFilter.startMonth"
+      />
+      <base-input
+        identifier="end-month"
+        label="End Month"
+        v-model="dateFilter.endMonth"
+      />
+      <base-button>Filter</base-button>
     </div>
     <table class="table">
       <tr>

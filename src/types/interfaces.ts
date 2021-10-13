@@ -13,4 +13,8 @@ export interface ITransaction {
   updatedAt: string;
 }
 
-export type IFilter = "start" | "end" | null;
+export interface IDateFilter {
+  startMonth: string;
+  endMonth: string;
+}
+export type ISorter = "start" | "end" | null;
