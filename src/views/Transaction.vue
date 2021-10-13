@@ -1,13 +1,13 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { transactionModule } from "@/store/modules/Transactions.store";
-import { Transaction } from "@/types/interfaces";
+import { ITransaction } from "@/types/interfaces";
 
 @Component({
-  name: "TransactionList",
+  name: "Transaction",
 })
 export default class TransactionList extends Vue {
-  get transaction(): Transaction | null {
+  get transaction(): ITransaction | null {
     return transactionModule.transaction;
   }
   mounted(): void {

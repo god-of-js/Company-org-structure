@@ -1,20 +1,47 @@
 import { VuexModule, Module, Mutation, Action } from "vuex-class-modules";
 import API from "@/api";
-import { Transaction } from "@/types/interfaces";
+import { IFilter, ITransaction } from "@/types/interfaces";
 
 @Module
 class TransactionsModule extends VuexModule {
-  transactions: Transaction[] = [];
-  transaction: Transaction | null = null;
+  transactions: ITransaction[] = [];
+  transaction: ITransaction | null = null;
+  sortValue: IFilter = null;
 
   @Mutation
-  setTransactions(param: Transaction[]) {
+  setTransactions(param: ITransaction[]) {
     this.transactions = param;
   }
 
   @Mutation
-  setTransaction(param: Transaction) {
+  setTransaction(param: ITransaction) {
     this.transaction = param;
+  }
+
+  @Mutation
+  setFilter(value: IFilter) {
+    this.sortValue = value;
+  }
+
+  get transactionList(): ITransaction[] {
+    if (this.sortValue === "start") {
+      const transactions = this.transactions?.slice().sort((first, second) => {
+        const a = new Date(first.createdAt);
+        const b = new Date(second.createdAt);
+
+        return a.getTime() - b.getTime();
+      });
+      return transactions;
+    } else if (this.sortValue === "end") {
+      const transactions = this.transactions?.slice().sort((first, second) => {
+        const a = new Date(first.createdAt);
+        const b = new Date(second.createdAt);
+
+        return b.getTime() - a.getTime();
+      });
+      return transactions;
+    }
+    return this.transactions;
   }
 
   @Action

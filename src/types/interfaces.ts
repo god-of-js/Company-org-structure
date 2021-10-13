@@ -1,4 +1,4 @@
-export interface Transaction {
+export interface ITransaction {
   id: number;
   uid: string;
   account: string;
@@ -12,3 +12,5 @@ export interface Transaction {
   createdAt: string;
   updatedAt: string;
 }
+
+export type IFilter = "start" | "end" | null;

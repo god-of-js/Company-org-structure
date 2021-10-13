@@ -1,15 +1,25 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { transactionModule } from "@/store/modules/Transactions.store";
-import { Transaction } from "@/types/interfaces";
+import { IFilter, ITransaction } from "@/types/interfaces";
 
 @Component({
-  name: "TransactionList",
+  name: "Transactions",
 })
 export default class TransactionList extends Vue {
-  get transactions(): Transaction[] {
-    return transactionModule.transactions;
+  get transactions(): ITransaction[] {
+    return transactionModule.transactionList;
   }
+  getDate(date: string): string {
+    return ` ${new Date(date).getDate()} - ${new Date(
+      date
+    ).getMonth()} - ${new Date(date).getFullYear()}`;
+  }
+
+  private setFilter(value: IFilter) {
+    transactionModule.setFilter(value);
+  }
+
   mounted(): void {
     transactionModule.getTransactions();
   }
@@ -18,6 +28,16 @@ export default class TransactionList extends Vue {
 
 <template>
   <div>
+    <div class="actions">
+      <base-button @click="setFilter('start')"
+        ><base-icon icon="filter" class="icon-margin" /> Filter by start
+        month</base-button
+      >
+      <base-button @click="setFilter('end')"
+        ><base-icon icon="filter" class="icon-margin" /> Filter by end
+        month</base-button
+      >
+    </div>
     <table class="table">
       <tr>
         <th>ID</th>
@@ -25,6 +45,7 @@ export default class TransactionList extends Vue {
         <th>Description</th>
         <th>Amount</th>
         <th>Currency</th>
+        <th>CreatedAt</th>
         <th>Actions</th>
       </tr>
       <tr v-for="(transaction, index) in transactions" :key="index" class="row">
@@ -33,6 +54,7 @@ export default class TransactionList extends Vue {
         <td>{{ transaction.description }}</td>
         <td>{{ transaction.amount }}</td>
         <td>{{ transaction.currency }}</td>
+        <td>{{ getDate(transaction.createdAt) }}</td>
         <td>
           <base-link
             :to="{ name: 'Transaction', params: { id: transaction.id } }"
@@ -53,5 +75,14 @@ export default class TransactionList extends Vue {
 .row:hover {
   color: black;
   background: white;
+}
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.icon-margin {
+  margin-right: 10px;
 }
 </style>

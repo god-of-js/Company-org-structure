@@ -22,6 +22,7 @@ const GET_TRANSACTIONS = gql`
       amount
       currency
       updatedAt
+      createdAt
       description
     }
   }
